@@ -14,7 +14,8 @@ public class CharController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        forward = Camera.main.transform.forward;
+        //forward = Camera.main.transform.forward;
+        forward = transform.forward;
         forward.y = 0f;
         forward=Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0,90,0))*forward; //90 degrees to forward vector
@@ -38,9 +39,12 @@ public class CharController : MonoBehaviour
 
         Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
 
-        transform.forward = heading;
-        transform.position += rightMovement;
-        transform.position += upMovement;
+        if(heading != Vector3.zero)
+        {
+            transform.forward = heading;
+            transform.position += rightMovement;
+            transform.position += upMovement;
+        }
     }
 
 }
